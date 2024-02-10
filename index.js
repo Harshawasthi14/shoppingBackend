@@ -59,6 +59,7 @@ const opts = {};
 opts.jwtFromRequest = cookieExtractor;
 opts.secretOrKey = process.env.JWT_SECRET_KEY; // TODO: should not be in code;
 
+app.use(express.static(path.resolve(__dirname,"build")));
 app.use(cookieParser());
 
 
@@ -231,5 +232,3 @@ app.listen(process.env.PORT,()=>{
     console.log("server started ")
 })
 
-
-//mongodb+srv://harsh:eLF184EBXUVxUqJv@cluster0.hdu6dfb.mongodb.net/ecommerce?retryWrites=true&w=majority
