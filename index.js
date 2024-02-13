@@ -11,7 +11,6 @@ const jwt = require('jsonwebtoken');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const cookieParser= require("cookie-parser");
-
 const productsRouter =require("./routes/Product");
 const brandsRouter =require("./routes/Brand");
 const categoriesRouter =require("./routes/Category");
@@ -27,6 +26,11 @@ const { Order } = require("./model/Order");
 
 
 const endpointSecret = process.env.ENDPOINT_SECRET;
+
+
+
+
+  
 
 app.post('/webhook', express.raw({type: 'application/json'}), async(request, response) => {
   const sig = request.headers['stripe-signature'];
@@ -94,6 +98,8 @@ app.use("/users",isAuth(),usersRouter.router)
 app.use("/auth",authRouter.router)
 app.use("/cart",isAuth(),cartRouter.router)
 app.use("/orders",isAuth(),ordersRouter.router)
+
+
 
 passport.use(
     'local',
