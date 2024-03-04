@@ -218,12 +218,6 @@ app.post("/create-payment-intent", async (req, res) => {
 });
 
 
-
-
-
-
-
-
 //database connection
 main().catch(err=> console.log("database not connected"))
 async function main(){
