@@ -88,9 +88,9 @@ app.use(
  
 
 app.use(express.json());
-app.use(cors({
-    exposedHeaders:["X-Total-Count"]
-}));
+// app.use(cors({
+//     exposedHeaders:["X-Total-Count"]
+// }));
 app.use("/products",isAuth(),productsRouter.router)
 app.use("/brands",isAuth(),brandsRouter.router)
 app.use("/categories",isAuth(),categoriesRouter.router)
@@ -118,7 +118,7 @@ passport.use(
             'sha256',
             async function (err, hashedPassword) {
               if (!crypto.timingSafeEqual(user.password, hashedPassword)) {
-                done(null, false, {message:"invalid credentials"});
+               return done(null, false, {message:"invalid credentials"});
                 } 
                     const token = jwt.sign(sanitizeUser(user), process.env.JWT_SECRET_KEY);
                     done(null ,{id:user.id, role:user.role,token});
@@ -126,6 +126,7 @@ passport.use(
         console.log({user})
     
       } catch (err) {
+        done(err);
         console.log(err);
         // res.status(400).json(err);
       }
